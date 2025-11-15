@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	// partOne()
+	partOne()
 	partTwo()
 }
 
@@ -60,7 +60,6 @@ func partTwo() {
 		endPointer := len(fileSystem) - 1
 
 		for endPointer >= 0 {
-			// fmt.Println(fileSystem)
 			// Find next file block
 			if fileSystem[endPointer] == "." {
 				endPointer--
@@ -71,7 +70,6 @@ func partTwo() {
 			}
 
 			fileId := fileSystem[endPointer]
-			// fmt.Println("file id", fileId)
 
 			// Find length of block
 			fileLen := 0
@@ -80,8 +78,6 @@ func partTwo() {
 				fileLen++
 				tmpPointer--
 			}
-
-			// fmt.Println("file len", fileLen)
 
 			// If we've attempted to move this file before, continue
 			if _, ok := movedOrAttemptedIds[fileId]; ok {
@@ -107,8 +103,6 @@ func partTwo() {
 				}
 				i++
 			}
-
-			// fmt.Println("free space", freeSpace)
 
 			if match {
 				// We can move the file into the free space
