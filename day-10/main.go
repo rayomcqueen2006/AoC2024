@@ -68,38 +68,6 @@ func partTwo() {
 			if topoMap[y][x] == "0" {
 				trailTree := generateTrailTree(topoMap, x, y)
 
-				nodesToRemove := []position{}
-				start := true
-				for len(nodesToRemove) != 0 || start {
-					start = false
-					nodesToRemove := []position{}
-					for _, trailNode := range trailTree {
-						// this is the end of a particular path - if it is not a complete path remove the node
-						if len(trailNode.children) == 0 && trailNode.value != "9" {
-							// fmt.Println("node has no children -", trailNode.position)
-							nodesToRemove = append(nodesToRemove, trailNode.position)
-						}
-					}
-					for _, pos := range nodesToRemove {
-						delete(trailTree, pos)
-						// remove the node from any lists of children
-						for _, treeNode := range trailTree {
-							newChildren := []position{}
-							for _, child := range treeNode.children {
-								if child != pos {
-									newChildren = append(newChildren, child)
-								}
-							}
-							trailTree[treeNode.position] = node{
-								position: treeNode.position,
-								value:    treeNode.value,
-								children: newChildren,
-							}
-						}
-					}
-				}
-
-				// Now we are left with only the paths leading to 9s
 				// Do a DFS to find all the paths
 				stack := make([]position, 0)
 				dfs(position{x: x, y: y}, "9", stack, trailTree)
